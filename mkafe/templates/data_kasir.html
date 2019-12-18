@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Data Kasir{% endblock %}
+
+{% block content %}
+<h2>Data Kasir</h2>
+{{ msg }}
+<div>
+	<p><a href="{{ url_for('tambah_kasir') }}"><button class="btn">Kasir Baru</button></a></p>
+	<table width="100%" class="bb" style="table-layout:fixed;">
+		<tr>
+			<th width="20%">Nama Kasir</th>
+			<th width="30%">Alamat</th>
+			<th width="15%">No.Telepon</th>
+			<th width="20%">Email</th>
+			<th width="15%">Modifikasi</th>
+		</tr>
+		{% for baris in container %}
+		<tr align="center" style="word-wrap:break-word;">
+			<td>{{ baris[1] }}</td>
+			<td align="left">{{ baris[2] }}</td>
+			<td>{{ baris[5] }}</td>
+			<td align="left">{{ baris[6] }}</td>
+			<td align="center">
+				<a href="/ubah_kasir/{{ baris[0] }}"><button><i class="fas fa-edit"></i></button></a>
+				<a href="/hapus_kasir/{{ baris[0] }}"><button><i class="fas fa-trash"></i></button></a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+{% endblock %}

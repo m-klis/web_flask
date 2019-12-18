@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Ganti Password Admin{% endblock %}
+
+{% block content %}
+<h2>Ganti Password Admin</h2>
+<div class="input-group margin-bottom-sm">
+	<form action="{{ url_for('pass_admin') }}" method="post">
+		<label for="password">
+			<i class="fas fa-lock"></i>
+		</label>
+		<input type="password" name="passlama" placeholder="Password lama" id="passlama" autofocus="autofocus" maxlength="100" required><br />
+		<label for="password">
+			<i class="fas fa-lock"></i>
+		</label>
+		<input type="password" name="passbaru1" placeholder="Password baru" id="passbaru1" maxlength="100" required><br />
+		<label for="password">
+			<i class="fas fa-lock"></i>
+		</label>
+		<input type="password" name="passbaru2" placeholder="Ulangi password baru" id="passbaru2" maxlength="100" required>
+		<div class="msg" > {{ msg }}</div><hr />
+		<input type="submit" value="Simpan Perubahan">
+	</form>
+</div>
+{% endblock %}

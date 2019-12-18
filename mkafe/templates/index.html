@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Index{% endblock %}
+
+{% block content %}
+{% if msg %}
+<div><p>
+<strong>{{ msg }}</strong>
+</p></div>
+{% endif %}
+			<div>
+			<h2> Photo Athaya Coffee </h2>
+				<table width="100%" style="table-layout:fixed;">
+					<tr>
+						<td><div class="polaroid"><img src="/static/images/athaya/1.jpg" style="width:100%"></div></td>
+						<td><div class="polaroid"><img src="/static/images/athaya/2.jpg" style="width:100%"></div></td>
+						<td><div class="polaroid"><img src="/static/images/athaya/3.jpg" style="width:100%"></div></td>
+					</tr>
+					<tr>
+						<td><div class="polaroid"><img src="/static/images/athaya/4.jpg" style="width:100%"></td>
+						<td><div class="polaroid"><img src="/static/images/athaya/6.jpg" style="width:100%"></td>
+						<td><div class="polaroid"><img src="/static/images/athaya/7.jpg" style="width:100%"></td>
+					</tr>
+				</table>
+			</div>
+<div>
+<h2>Petunjuk Penggunaan.</h2>
+<ul class="b">
+<li>Pilih "<strong style="color:#4a536e;">Daftar Menu</strong>", untuk melakukan pemesanan.</li><br/>
+<li>Pilih "<strong style="color:#4a536e;">Daftar Member</strong>", daftar sebagai member. Dapatkan diskon member jika melakukan pemesanan sebagai member.</li><br/>
+*) <strong>Diskon hanya berlaku untuk member</strong><br/>
+*) <strong>Buka daftar menu untuk melihat diskon</strong><br/><br/>
+<li>Pilih "<strong style="color:#4a536e;">Login</strong>", untuk masuk sebagai pengguna aplikasi atau member.</li>
+</ul>
+</div>
+{% endblock %}

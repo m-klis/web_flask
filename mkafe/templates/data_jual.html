@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Penjualan{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<h2>Data Penjualan Tersimpan</h2>
+<div>
+	{{ msg }}
+	{% if session['login_as'] == 'admin' %}
+	<form action="{{ url_for('data_jual') }}" method="post" autocomplete="off">
+	<table width="100%"><tr>
+	<td><input type="submit" value="Cari" class="button"/></td>
+	<td>Status:</td><td><select name="status" id="status">
+	<option value="semua">semua</option>
+	{% for i in status %}
+	{% if i[0] == kate %}
+	<option value="{{ i[0] }}" selected>{{ i[0] }}</option>
+	{% else %}
+	<option value="{{ i[0] }}">{{ i[0] }}</option>
+	{% endif %}
+	{% endfor %}
+	</select></td>
+	<td>Dari:</td><td><input type="date" name="tglawal" id="tglawal" value="{{ tanggal[0] }}"></td><td>sampai</td><td><input type="date" name="tglakhir" id="tglakhir" value="{{ tanggal[1] }}"></td><td>ID:</td><td><input type="text" name="idtrans" id="idtrans" value="{{ idtrans }}" placeholder="ID.Transaksi" size="8" maxlength="15"/></td>
+	<td><input type="reset" value="reset" class="buttonnn"/></td>
+	</tr></table>
+	</form>
+	{% endif %}
+	<table width="100%" class="bb" style="table-layout:fixed;">
+		<tr>
+			<th width="20%">ID.Transaksi</th>
+			<th width="10%">No.Meja</th>
+			<th width="25%">Atas Nama</th>
+			<th width="12%">Total Bayar</th>
+			<th width="13%">Status Trx</th>
+			<th width="20%">Aksi</th>
+		</tr>
+		{% for d in contain %}
+		<tr align="center" style="word-wrap:break-word;">
+			<td>{{ d[1] }}</td>
+			<td>{{ d[13] }}</td>
+			<td>{{ d[8] }}</td>
+			<td>{{ d[5] }}</td>
+			<td>{{ d[11] }}</td>
+			<td>
+				<a href="/detail/{{ d[0] }}"><button>Detail</button></a>
+				{% if session['login_as']=='admin' %}
+				<a href="/hapus_jual/{{ d[0] }}/cek"><button>Hapus</button></a>
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+{% if session['login_as'] == 'kasir' %}
+<div>
+<h2>Kirim Data Penjualan >>> <a href="{{ url_for('lapor_jual') }}"><button class="buttonn">OK</button></a></h2>
+<p class="ex">*) klik ok, untuk kirim data laporan penjualan.</p>
+</div>
+{% endif %}
+{% endblock %}

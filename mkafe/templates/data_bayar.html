@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Pembayaran{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div>
+	<table width="100%" class="bb" border="0" style="table-layout:fixed;">
+		<tr>
+			<th width="20%">ID.Transaksi</th>
+			<th width="10%">No.Meja</th>
+			<th width="25%">Atas Nama</th>
+			<th width="12%">Total Bayar</th>
+			<th width="13%">Status Bayar</th>
+			<th width="20%">Konfirmasi</th>
+		</tr>
+		{% for d in contain %}
+		<tr align="center" style="word-wrap:break-word;">
+			<td>{{ d[1] }}</td>
+			<td>{{ d[13] }}</td>
+			<td>{{ d[8] }}</td>
+			<td>{{ d[5] }}</td>
+			<td>
+			{% if d[10]=='bayar' %}
+				<p style="color:green;">{{ d[10] }}</p></td>
+			{% else %}
+				<p style="color:red;">{{ d[10] }}</p></td>
+			{% endif %}
+			<td align="right">
+			{% if d[10]=='bayar' %}
+				<a href="/simpan/{{ d[0] }}"><button>Simpan</button></a>
+				<a href="/detail/{{ d[0] }}"><button>Detail</button></a>
+			{% else %}
+				<a href="/pembayaran/{{ d[0] }}"><button>Konfirmasi</button></a>
+				<a href="/detail/{{ d[0] }}"><button>Detail</button></a>
+			{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+{% endblock %}

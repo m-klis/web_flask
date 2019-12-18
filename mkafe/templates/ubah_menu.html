@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block title %}Ubah Data Menu{% endblock %}
+
+{% block content %}
+<h2>Ubah Data Menu</h2>
+<script type="text/javascript">
+function Checkradiobutton() { if(document.getElementById('other').checked==false)
+{document.getElementById('otherPosition').disabled=true;}else{document.getElementById('otherPosition').disabled=false;}}
+</script>
+<div>
+	<form action="/ubah_menu/{{ baris[0] }}" method="post" enctype="multipart/form-data">
+		<table border="0" width="100%">
+		<tr>
+		<td width="50%">
+		<input type="hidden" value="{{ baris[0] }}" name="idmenu" />
+		<label for="nama"><i class="fas fa-book"></i> Nama Menu :</label><br />
+		<input type="text" name="nama" value="{{ baris[1] }}" id="nama" maxlength="50" required><br />
+		<label for="deskripsi"><i class="fas fa-home"></i> Deskripsi :</label><br />
+		<textarea name="deskripsi" id="deskripsi" width="250px" height="150px" maxlength="100" required>{{ baris[5] }}</textarea><br />
+		<label for="kategori"><i class="fas fa-city"></i> Kategori :</label><br />
+		{% for pilih in container %}{% if pilih[0] == baris[2] %}
+		<input type="radio" name="kategori" id="{{ pilih[0] }}" value="{{ pilih[0] }}" onclick="Checkradiobutton()" checked />{{ pilih[0] }}<br />
+		{% else %}
+		<input type="radio" name="kategori" id="{{ pilih[0] }}" value="{{ pilih[0] }}" onclick="Checkradiobutton()"/>{{ pilih[0] }}<br />
+		{% endif %}
+		{% endfor %}
+		<input type="radio" name="kategori" id="other" onclick="Checkradiobutton()"/>
+		<input type="text" id="otherPosition" placeholder="Kategori lain" maxlength="25" name="otherPosition" onChange="Checkvalue(this)" /><br />
+		<label for="harga"><i class="fas fa-phone"></i> Harga :</label><br />
+		<input type="text" name="harga" value="{{ baris[4] }}" id="harga" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required><br />
+		<label for="diskon"><i class="fa fa-price"></i> Diskon(%) :</label><br />
+		<input type="number" name="diskon" min="0" max="100" value="{{ baris[6] }}" /><br/>
+		<label for="ppn"><i class="fa fa-value"></i> Ppn(%) :</label><br/> 
+		<input type="number" name="ppn" min="0" max="100" value="{{ baris[7] }}" /><br/>
+		<label for="foto"><i class="fa fa-camera"></i> Foto :</label><br />
+		<input type="file" name="fotobaru" id="fotobaru" value=""><br />
+		*) upload foto baru
+		</td>
+		<td valign="top" width="50%">
+		<h3>Foto : {{ baris[3] }}</h3><br /><img src="/static/images/{{ baris[3] }}" />
+		</td>
+		</tr>
+		</table>
+		{{ msg }}<hr />
+		<input type="submit" value="Simpan" />
+	</form>
+</div>
+{% endblock %}

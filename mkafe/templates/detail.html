@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block title %}Detail Transaksi{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<h2>Detail Transaksi</h2>
+<div>
+	<table width="100%">
+		{% for i in contain %}
+		<tr>
+			<td width="20%">{{ i[0] }}</td>
+			<td>: {{ i[1] }}</td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td>Detail Pesan</td>
+			<td>: </td>
+		</tr>
+	</table>
+	<table width="100%" class="table_legenda">
+		<tr class="bb"><th width="0%"></th><th width="50%">Menu</th><th width="50%">Harga</th></tr>
+		{% for o in pesan %}
+		<tr class="bbb">
+			<td></td>
+			<td>{{ o[0][0] }}<br/>*){{ o[1][4] }}</td>
+			<td align="right">{{ o[1][3] }} * {{ o[0][1] }} ( disk {{ o[1][5] }}% & ppn {{ o[1][6] }}% )<br/>Rp. {{ o[1][2] }}</td>
+		</tr>
+		{% endfor %}
+	</table><br/>
+	<table width="70%">
+		<tr>
+			<td width="40%">
+			{% if status[0] == 'belum' and session['login_as'] == 'kasir' %}
+			<a href="{{ url_for('data_bayar') }}" class="button">OK</a>
+			{% else %}
+			<a href="{{ url_for('data_jual') }}" class="button">OK</a>
+			{% endif %}
+			</td>
+			<td width="20%">
+			{% if status[1] == 'bayar' %}
+			<a href="/cetak/{{ status[2] }}" class="buttonnn">STRUK</a>
+			{% endif %}
+			</td>
+			<td width="0%">
+			{% if session['login_as'] == 'admin' %}
+			<a href="/cetak_detail/{{ status[2] }}" class="buttonnn">CETAK DETAIL</a>
+			{% endif %}
+			<td>
+		</tr>
+	</table>
+</div>
+{% endblock %}

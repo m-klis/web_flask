@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block title %}Ubah Data Kasir{% endblock %}
+
+{% block content %}
+<script>
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+<h2>Ubah Data Kasir</h2>
+<div>
+	<form action="/ubah_kasir/{{ baris[0] }}" method="post">
+		<input type="hidden" name="iniid" value="{{ baris[0] }}">
+		<label for="nama">
+			<i class="fas fa-book"></i> Nama Lengkap :
+		</label><br />
+		<input type="text" name="nama" value="{{ baris[1] }}" id="nama" maxlength="50" required><br />
+		<label for="alamat">
+			<i class="fas fa-home"></i> Alamat :
+		</label><br />
+		<!-- <input type="textarea" name="alamat" value="{{ baris[2] }}" id="alamat" required><br /> -->
+		<textarea name="alamat" id="alamat" maxlength="100" required>{{ baris[2] }}</textarea><br />
+		<label for="tgllahir">
+			<i class="fas fa-moon"></i> Tanggal Lahir :
+		</label><br />
+		<input type="date" name="tgllahir" id="tgllahir" value="{{ baris[3] }}" required><br />
+		<label for="kotalahir">
+			<i class="fas fa-city"></i> Tempat Lahir :
+		</label><br />
+		<input type="text" name="kotalahir" value="{{ baris[4] }}" id="kotalahir" maxlength="40" required><br />
+		<label for="telepon">
+			<i class="fas fa-phone"></i> Telepon :
+		</label><br />
+		<input type="text" name="telepon" value="{{ baris[5] }}" id="telepon" maxlength="20" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required><br />
+		<label for="email">
+                        <i class="fas fa-envelope"></i> Email :
+                </label><br />
+                <input type="email" name="email" value="{{ baris[6] }}" id="email" maxlength="50" required><br />
+		<label for="username">
+			<i class="fas fa-user"></i> Username :
+		</label><br />
+		<input type="hidden" name="userlama" value="{{ baris[7] }}">
+		<input type="text" name="username" value="{{ baris[7] }}" id="username" maxlength="20" required> {{ msg }}<br />
+		<label for="password">
+			<i class="fas fa-lock"></i> Password :
+		</label><br />
+		<input type="hidden" name="passlama" value="{{ baris[8] }}">
+		<input type="password" name="password" value="{{ baris[8] }}" id="password" maxlength="100" required><br />
+		<input type="checkbox" onclick="myFunction()">Show Password
+		<hr />
+		<input type="submit" value="Simpan">
+	</form>
+</div>
+{% endblock %}

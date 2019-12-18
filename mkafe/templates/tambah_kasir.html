@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block title %}Tambah Kasir Baru{% endblock %}
+
+{% block content %}
+<script>
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+<h2>Tambah Data Kasir</h2>
+<div>
+	<form action="{{ url_for('tambah_kasir') }}" method="post">
+		<label for="nama">
+			<i class="fas fa-book"></i> Nama Lengkap :
+		</label><br />
+		<input type="text" name="nama" placeholder="Nama Lengkap" id="nama" maxlength="50" required><br />
+		<label for="alamat">
+			<i class="fas fa-home"></i> Alamat :
+		</label><br />
+		<textarea name="alamat" placeholder="Alamat" id="alamat" maxlength="100" required></textarea><br />
+		<label for="tgllahir">
+			<i class="fas fa-moon"></i> Tanggal Lahir :
+		</label><br />
+		<input type="date" name="tgllahir" id="tgllahir" required><br />
+		<label for="kotalahir">
+			<i class="fas fa-city"></i> Tempat Lahir :
+		</label><br />
+		<input type="text" name="kotalahir" placeholder="Kota" id="kotalahir" maxlength="40" required><br />
+		<label for="telepon">
+			<i class="fas fa-phone"></i> Telepon :
+		</label><br />
+		<input type="text" name="telepon" placeholder="Telepon" id="telepon" maxlength="20" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required><br />
+		<label for="email">
+                        <i class="fas fa-envelope"></i> Email :
+                </label><br />
+                <input type="email" name="email" placeholder="Email" id="email" maxlength="50" required><br />
+		<label for="username">
+			<i class="fas fa-user"></i> Username :
+		</label><br />
+		<input type="text" name="username" placeholder="Username" id="username" maxlength="20" required> {{ msg }}<br />
+		<label for="password">
+			<i class="fas fa-lock"></i> Password :
+		</label><br />
+		<input type="password" name="password" placeholder="Password" id="password" maxlength="100" required><br />
+		<input type="checkbox" onclick="myFunction()">Show Password
+		<hr />
+		<input type="submit" value="Simpan">
+	</form>
+</div>
+{% endblock %}

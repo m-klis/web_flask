@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block title %}Ubah Member{% endblock %}
+
+{% block content %}
+<script>
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+<h2>Ubah Data Member</h2>
+<div>
+	<form action="/ubah_member/{{ baris[0] }}" method="post">
+		<input type="hidden" name="iniid" value="{{ baris[0] }}">
+		<label for="nama">
+			<i class="fas fa-book"></i> Nama Lengkap :
+		</label><br />
+		<input type="text" name="nama" value="{{ baris[1] }}" placeholder="Nama Lengkap" id="nama" maxlength="50" required><br />
+		<label for="alamat">
+			<i class="fas fa-home"></i> Alamat :
+		</label><br />
+		<!-- <input type="textarea" name="alamat" value="{{ baris[2] }}" placeholder="Alamat" id="alamat" required> -->
+		<textarea name="alamat" id="alamat" maxlength="100" required>{{ baris[2] }}</textarea><br />
+		<label for="telepon">
+			<i class="fas fa-phone"></i> Telepon :
+		</label><br />
+		<input type="text" name="telepon" value="{{ baris[3] }}" placeholder="Telepon" id="telepon" maxlength="20" required><br />
+		<label for="email">
+                        <i class="fas fa-envelope"></i> Email :
+                </label><br />
+                <input type="email" name="email" value="{{ baris[4] }}" placeholder="Email" id="email" maxlength="50" required><br />
+		<label for="username">
+			<i class="fas fa-user"></i> Username :
+		</label><br />
+		<input type="hidden" name="userlama" value="{{ baris[5] }}">
+		<input type="text" name="username" value="{{ baris[5] }}" placeholder="Username" id="username" maxlength="20" required> {{ msg }}<br />
+		<label for="password">
+			<i class="fas fa-lock"></i> Password :
+		</label><br />
+		<input type="hidden" name="passlama" value="{{ baris[6] }}">
+		<input type="password" name="password" value="{{ baris[6] }}" placeholder="Password" id="password" maxlength="100" required><br />
+		<input type="checkbox" onclick="myFunction()">Show Password
+		<hr />
+		<input type="submit" value="Simpan Perubahan">
+	</form>
+</div>
+{% endblock %}

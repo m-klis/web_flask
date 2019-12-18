@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}" type="text/css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}" type="text/css">
+		{% block head %}{% endblock %}
+	</head>
+	<body class="loggedin">
+		<nav class="navtop">
+			<div>
+				<h1><a href="{{ url_for('index') }}"><i class="fa fa-coffee"></i> ATHAYA COFFEE</a></h1>
+				{% if session['login_as']=='admin' %}
+				<a href="{{ url_for('data_menu') }}">Data Menu</a>
+				<a href="{{ url_for('data_kasir') }}">Data Kasir</a>
+				<a href="{{ url_for('data_jual') }}">Data Penjualan</a>
+				<a href="{{ url_for('data_member') }}">Data Member</a>
+				<a href="{{ url_for('pass_admin') }}">Ubah Password</a>
+				<a href="{{ url_for('logout') }}">Logout</a>
+				{% elif session['login_as']=='kasir' %}
+				<a href="{{ url_for('menu') }}">Daftar Menu</a>
+				<a href="{{ url_for('data_bayar') }}">Pembayaran</a>
+				<a href="{{ url_for('data_jual') }}">Penjualan</a>
+				<a href="{{ url_for('data_member') }}">Data Member</a>
+				<a href="{{ url_for('pass_kasir') }}">Ubah Login</a>
+				<a href="{{ url_for('logout') }}">Logout</a>
+				{% elif session['login_as']=='member' %}
+				<a href="{{ url_for('menu') }}"><i class="fas fa-home"></i>Daftar Menu</a>
+				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+				{% else %}
+		                <a href="{{ url_for('menu') }}"><i class="fas fa-home"></i>Daftar Menu</a>
+				<a href="{{ url_for('daftar_member') }}"><i class="fas fa-user-circle"></i>Daftar Member</a>
+				<a href="{{ url_for('login') }}"><i class="fas fa-sign-out-alt"></i>Login</a>
+				{% endif %}
+			</div>
+		</nav>
+		<div class="content">
+			{% block content %}{% endblock %}
+		</div>
+		<br/>
+		<nav class="footer">
+		INFORMATIKA USM &copy; 2019 MUKLIS DWI SANTOSO
+		</nav>
+	</body>
+</html>
+

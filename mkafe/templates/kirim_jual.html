@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Penjualan{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<h2>Laporan Penjualan</h2>
+<div>
+		<table width="50%">
+			<tr><td width="25%">Tanggal</td><td>: {{ data[0] }}</td></tr>
+			<tr><td>Nama Kasir</td><td>: {{ data[1] }}</td></tr>
+			<tr><td>Total Setor</td><td>: Rp {{ data[2] }}</td></tr>
+			<tr><td colspan="2"><a href="/lapor_kirim/{{ data[3] }}"><button class="button">OK</button></a></td></tr>
+		</table>	
+</div>
+{% endblock %}

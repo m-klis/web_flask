@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block title %}Tambah Menu Baru{% endblock %}
+
+{% block content %}
+<h2>Tambah Data Menu</h2>
+<script type="text/javascript">
+function Checkradiobutton() { if(document.getElementById('other').checked==true)
+{document.getElementById('otherPosition').disabled=false;}else{document.getElementById('otherPosition').disabled=true;}}
+</script>
+<div>
+	<form action="{{ url_for('menu_baru') }}" method="post" enctype="multipart/form-data">
+		<label for="nama"><i class="fas fa-book"></i> Nama Menu :</label><br />
+		<input type="text" name="nama" placeholder="Nama Menu" id="nama" maxlength="50" required><br />
+		<label for="deskripsi"><i class="fas fa-home"></i> Deskripsi :</label><br />
+		<textarea name="deskripsi" placeholder="Deskripsi menu" id="deskripsi" width="250px" height="150px" maxlength="100" required></textarea><br />
+		<label for="kategori"><i class="fas fa-city"></i> Kategori :</label><br />
+		{% for pilih in container %}
+		<input type="radio" name="kategori" id="{{ pilih[0] }}" value="{{ pilih[0] }}" onclick="Checkradiobutton()"/>{{ pilih[0] }}<br />
+		{% endfor %}
+		<input type="radio" name="kategori" id="other" onclick="Checkradiobutton()" checked/>
+		<script type="text/javascript">function Checkvalue(isi){ document.getElementById("other").value = isi.value;}</script>
+		<input type="text" id="otherPosition" maxlength="25" placeholder="Kategori lain" name="otherPosition" onChange="Checkvalue(this)" required /><br />
+		<label for="harga"><i class="fas fa-phone"></i> Harga :</label><br />
+		<input type="text" name="harga" placeholder="harga" id="harga" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required><br />
+		<label for="diskon"><i class="fa fa-price"></i> Diskon(%) :</label><br />
+		<input type="number" name="diskon" min="0" max="100" value="0" /><br/>
+		<label for="ppn"><i class="fa fa-value"></i> Ppn(%) :</label><br/> 
+		<input type="number" name="ppn" min="0" max="100" value="10" /><br/>
+		<label for="foto"><i class="fa fa-camera"></i> Foto :</label><br />
+		<input type="file" name="foto" id="foto" required/><br />{{ msg }}<hr />
+		<input type="submit" value="Simpan" />
+	</form>
+</div>
+{% endblock %}

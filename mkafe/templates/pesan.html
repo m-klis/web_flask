@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Pemesanan{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div>
+<h2>Konfirmasi Pesan</h2>
+<form action="{{ url_for('bayar') }}" method="post">
+	<strong>No. Meja  :</strong><br/>
+	<input type="text" name="meja" placeholder="nomor meja saya" maxlength="3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required /><br/>
+	{% if session['loggedin']==True and session['login_as']=='member' %}
+	<strong>Atas Nama :</strong><br/>
+	<input type="hidden" name="idmember" value="{{ session['idmember'] }}" />
+	<input type="text" name="nama" value="{{ session['nmmember'] }}" maxlength="50" required /><br/>
+	<strong>No.telpon :</strong><br/>
+	<input type="text" name="kontak" value="{{ session['notelpon'] }}" maxlength="50"/><br/>
+	{% else %}
+	<strong>Atas Nama :</strong><br/>
+	<input type="hidden" name="idmember" value="no" />
+	<input type="text" name="nama" placeholder="masukan nama anda" maxlength="50" required /><br/>
+	<strong>No.telpon / email :</strong><br/>
+	<input type="text" name="kontak" placeholder="*) Optional" maxlength="50"/><br />
+	{% endif %} 
+	<strong>Rincian Pesanan :</strong><br/><br/>
+	<table width="100%" class="bb" style="table-layout:fixed;">
+	<tr style="word-wrap:break-word;">
+		<th width="40%">Detail</th>
+		<th width="15%">Harga</th>
+		<th width="15%">Diskon</th>
+		<th width="15%">Ppn</th>
+		<th width="15%">Total</th>
+	</tr>
+	{% for i in contain %}
+	<tr style="word-wrap:break-word;">
+		<td>
+			<input type="hidden" name="idmenu" value="{{ i[0] }}" />
+			{{ i[3] }}<br />
+			*){{ i[2] }}
+			<input type="hidden" name="comment" value="{{ i[2] }}" />
+		</td>
+		<td valign="top" align="right">{{ i[1] }} @{{ i[4] }}</td>
+		<td valign="top" align="center">{{ i[6] }}</td>
+		<td valign="top" align="center">{{ i[7] }}</td>
+		<td valign="top" align="center">
+		<input type="hidden" name="jumlah" value="{{ i[1] }}" />		
+		<input type="hidden" name="bayarmenu" value="{{ i[5] }}" />{{ i[5] }}</td>
+	</tr>
+	{% endfor %}
+	<tr>
+		<td colspan="4">Total Bayar</td>
+		<td align="center"><input type="hidden" name="bayar" value="{{ bayar }}" /><strong>{{ bayar }}</strong></td>
+	</tr>
+	</table><br />
+	<a href="{{ url_for('menu') }}"><button class="buttonnn">Batalkan pesanan</button></a> <input type="submit" value="Bayar" class="buttonn"/>
+</form>
+</div>
+{% endblock %}

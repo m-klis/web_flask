@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %}Konfirmasi Hapus Jual{% endblock %}
+
+{% block content %}
+<h2>Hapus Data Jual</h2>
+<div class="input-group margin-bottom-sm">
+<p><strong>Pastikan data sudah disimpan atau dicetak sebelum dihapus !</strong></p>
+<a href="/hapus_jual/{{ id }}/ok" class="buttonn">Hapus</a> | <a href="/cetak/{{ id }}" class="buttonnn">Struk</a> | <a href="/cetak_detail/{{ id }}" class="buttonnn">Detail</a>
+</div>
+{% endblock %}

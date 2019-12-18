@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Kasir{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div>
+	<table width="100%" class="bb">
+		<tr><td width="18%">Transaksi </td><td>: {{ contain[0] }}</td></tr>
+		<tr><td>No. Meja </td><td>: {{ contain[4] }}</td></tr>
+		<tr><td>Atas nama </td><td>: {{ contain[1] }}</td></tr>
+		<tr><td>Kembalian sebesar </td><td>: Rp. {{ contain[2] }}</td></tr>
+	</table>
+	<table width="100%">
+		<tr>
+			<td><a href="{{ url_for('data_bayar') }}" class="button">OK</a></td>
+			<td><a href="/cetak/{{ contain[3] }}" class="buttonnn">CETAK</a></td>
+		</tr>
+	</table>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Data Menu{% endblock %}
+
+{% block content %}
+<h2>Data Menu</h2>
+{% if msg %}
+<div>
+<strong>{{ msg }}</strong>
+</div>
+{% endif %}
+<div>
+	<p><a href="{{ url_for('menu_baru') }}"><button>Menu Baru</button></a>
+	<form action="#" method="post">
+	Kategori : 	
+	<select name="kate" id="kate">
+		<option value="semua">semua</option>
+		{% for pilih in kolom %}
+		{% if pilih[0] == kate %}
+		<option value="{{ pilih[0] }}" selected>{{ pilih[0] }}</option>
+		{% else %}
+		<option value="{{ pilih[0] }}">{{ pilih[0] }}</option>
+		{% endif %}
+		{% endfor %}
+	</select>
+	<input type="Submit" value="filter">
+	</form></p>
+	<table width="100%" border="1">
+		<tr>
+			<th width="20%">Foto</th>
+			<th width="30%">Deskripsi</th>
+			<th width="15%">Kategori</th>
+			<th width="20%">Harga</th>
+			<th width="15%">Modifikasi</th>
+		</tr>
+		{% for baris in container %}
+		<tr>
+			<td><img src="/static/images/{{ baris[3] }}" width="150px" height="150px"></td>
+			<td><h3>{{ baris[1] }}</h3><br/>{{ baris[5] }}</td>
+			<td>{{ baris[2] }}</td>
+			<td><strong>Rp. {{ baris[4] }}</strong><br/>*)ppn={{ baris[7] }}%<br/>*)diskon={{ baris[6] }}%</td>
+			<td>
+				<a href="/ubah_menu/{{ baris[0] }}"><button><i class="fas fa-edit"></i></button></a>
+				<a href="/hapus_menu/{{ baris[0] }}"><button><i class="fas fa-trash"></i></button></a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+{% endblock %}

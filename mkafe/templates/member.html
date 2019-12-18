@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}Halaman Member{% endblock %}
+
+{% block content %}
+{% if psn %}
+<div><p>
+<strong>{{ psn }}</strong><br/>*) Silahkan logout setelah selesai melakukan pemesanan.
+</p></div>
+{% endif %}
+<div>
+<h2>Petunjuk Penggunaan.</h2>
+<ul class="b">
+<li>Pilih "<strong style="color:#4a536e;">Daftar Menu</strong>", untuk melakukan pemesanan.</li><br/>
+<li>Pilih "<strong style="color:#4a536e;">Logout</strong>", untuk keluar login sebagai member.</li>
+</ul>
+</div>
+{% endblock %}
